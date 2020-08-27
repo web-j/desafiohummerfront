@@ -9,11 +9,17 @@ import { JwtInterceptor } from './security/auth-interceptor/jwt.interceptor';
 import { ErrorInterceptor } from './security/auth-interceptor/error.interceptor';
 import { MaterialModule } from './material.module';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DashboardComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent
   ],
   imports: [
     BrowserModule,

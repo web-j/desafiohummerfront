@@ -2,31 +2,37 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './security/auth-guard/auth.guard';
-import { AppComponent } from './app.component';
-import { AuthComponent } from './security/auth/auth.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './security/login/login.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: AdminLayoutComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
-        loadChildren: () => import('./view/event/event.module').then(mod => mod.EventModule)
+        component: DashboardComponent
       },
 
+      {
+        path: 'event',
+        loadChildren: () => import('./view/event/event.module').then(mod => mod.EventModule)
+      },
       {
         path: 'participant',
         loadChildren: () => import('./view/participant/participant.module').then(mod => mod.ParticipantModule)
       }
-    ]
+    ],
   },
 
   {
     path: '',
-    component: AuthComponent,
+    component: AuthLayoutComponent,
     children: [
       {
         path: 'login',
@@ -37,7 +43,7 @@ const routes: Routes = [
 
   { path: '', redirectTo: '', pathMatch: 'full' },
 
-  { path: '**', component: AuthComponent }
+  { path: '**', component: LoginComponent}
 ];
 
 @NgModule({
