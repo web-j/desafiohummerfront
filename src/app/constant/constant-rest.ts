@@ -9,3 +9,8 @@ export const CONSTANT_URL = {
     USEREVENT: 'UserEvent/'
 };
 
+export enum Rule {
+    Admin = 'ADMIN',
+    Participant = 'PARTICIPANT'
+}
+

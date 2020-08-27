@@ -1,8 +1,15 @@
-<mat-toolbar>
+<mat-toolbar class="color-toolbar">
+    <button mat-icon-button>
+        <mat-icon>outdoor_grill</mat-icon>
+    </button>
+
     <span>Churras da Firma</span>
+
+    <button (click)="goParticipants()" class="spacer-btn" mat-button> Participantes </button>
+    <button (click)="goEvents()" class="spacer-btn" mat-button> Eventos </button>
+
     <span class="example-spacer"></span>
-    <button matTooltip="Sair" (click)="logout()" mat-icon-button class="example-icon"
-        aria-label="Example icon-button with share icon">
+    <button matTooltip="Sair" (click)="logout()" mat-icon-button>
         <mat-icon>exit_to_app</mat-icon>
     </button>
 </mat-toolbar>

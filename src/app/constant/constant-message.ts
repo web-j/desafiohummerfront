@@ -12,5 +12,10 @@ export const toast = {
     welcome: {
         message: 'Bem vindo ao organizador de churrasco!',
         action: 'Fechar'
+    },
+
+    block: {
+        message: 'Seu Perfil não está autorizado!',
+        action: 'Fechar'
     }
 };

@@ -23,4 +23,12 @@ export class AdminLayoutComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  goParticipants() {
+    this.router.navigate(['/participant']);
+  }
+
+  goEvents() {
+    this.router.navigate(['/event']);
+  }
+
 }
