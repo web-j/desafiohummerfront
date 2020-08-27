@@ -4,5 +4,7 @@ export class Participant {
     sirname: string;
     email: string;
 
+    username: string;
+    password: string;
     statusEvent: string;
 }

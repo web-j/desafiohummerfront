@@ -1,0 +1,33 @@
+mat-sidenav-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+mat-sidenav-content {
+    background-color: #ff867c;
+}
+
+mat-sidenav {
+    background-color: #eeeeee;
+}
+
+.top-btn {
+    padding-top: 20%;
+}
+
+.icon-size {
+    height: 100px !important;
+    width: 100px !important;
+    font-size: 100px !important;
+    color: #ffffff;
+}
+
+.card {
+    max-width: 400px;
+    margin: 100px;
+    padding: 50px;
+    top: 15%;
+}

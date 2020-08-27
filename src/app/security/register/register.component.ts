@@ -1,56 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-
-import { AuthService } from '../auth-service/auth.service';
-import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+
+import { Participant } from '../../view/participant/participant-model/participant.model';
+import { RegisterService } from '../auth-service/register.service';
+import { toast } from '../../constant/constant-message';
 import { SpinnerComponent } from 'src/app/spinner/spinner.component';
-import { toast } from 'src/app/constant/constant-message';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-  returnUrl: string;
-  username: string;
-  password: string;
-  loading: any;
+  public obj: Participant = new Participant();
+
+  public loading: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private service: RegisterService,
     private router: Router,
-    private authService: AuthService,
 
     public snack: MatSnackBar,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  submitCredentials() {
+  save() {
     this.loading = this.spinner();
-    this.authService.login(this.username, this.password).pipe(first()).subscribe(
+    this.service.save(this.obj).subscribe(
       success => {
+        this.obj = success;
+
         setTimeout(() => {
           this.loading.close();
+          this.goLogin();
+          this.toast(toast.save_participant.message, toast.save_participant.action);
         }, 500);
-
-        this.router.navigate([this.returnUrl]);
-        this.toast(toast.welcome.message, toast.welcome.action);
-      }, error => {
+      },
+      error => {
         this.toast(toast.save_participant.message, toast.save_participant.action);
       });
   }
 
-  goRegister() {
-    this.router.navigate(['login/register']);
+  goLogin() {
+    this.router.navigate(['login']);
   }
 
   toast(message: string, action: string) {

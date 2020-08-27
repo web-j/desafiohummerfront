@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatFormFieldModule} from '@angular/material/form-field';
 
+import { MaterialModule } from '../material.module';
 import { SecurityRoutingModule } from './security-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth/auth.component';
-import { FormsModule } from '@angular/forms';
-
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent, AuthComponent],
+  declarations: [LoginComponent, AuthComponent, RegisterComponent],
   imports: [
     CommonModule,
     SecurityRoutingModule,
-    MatFormFieldModule,
-    FormsModule
+    MaterialModule
   ]
 })
 export class SecurityModule { }

@@ -13,13 +13,13 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
-        path: 'participant',
-        loadChildren: () => import('./view/participant/participant.module').then(mod => mod.ParticipantModule)
+        path: '',
+        loadChildren: () => import('./view/event/event.module').then(mod => mod.EventModule)
       },
 
       {
-        path: 'event',
-        loadChildren: () => import('./view/event/event.module').then(mod => mod.EventModule)
+        path: 'participant',
+        loadChildren: () => import('./view/participant/participant.module').then(mod => mod.ParticipantModule)
       }
     ]
   },
