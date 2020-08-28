@@ -1,0 +1,31 @@
+<mat-card class="row mat-elevation-z0 card" *ngIf="obj">
+    <mat-card-header class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs">
+        <mat-card-title *ngIf="edit"> Atualização Evento </mat-card-title>
+        <mat-card-title *ngIf="!edit"> Novo do Evento </mat-card-title>
+        <mat-card-subtitle>Informe os dados do evento ou atualize-os</mat-card-subtitle>
+    </mat-card-header>
+
+    <form #form="ngForm">
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <mat-label>Informe seu nome</mat-label>
+                    <input required matInput name="eventName" [(ngModel)]="obj.eventName">
+                </mat-form-field>
+
+                <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <mat-label>Data do Evento</mat-label>
+                    <input matInput [matDatepicker]="dp3" disabled required name="eventDate"
+                        [(ngModel)]="obj.eventDate">
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+        </mat-card-content>
+    </form>
+    <mat-card-actions class="row center-xs">
+        <button (click)="close()" mat-button>Cancelar</button>
+        <button (click)="saveOrUpdate()" [disabled]="!form.form.valid" mat-button>Enviar</button>
+    </mat-card-actions>
+</mat-card>

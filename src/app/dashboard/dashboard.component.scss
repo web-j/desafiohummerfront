@@ -1,0 +1,14 @@
+.btn-action {
+    display: flex;
+    justify-content: flex-end !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+// card setting
+.card {
+    max-width: 300px;
+    margin: 30px;
+}

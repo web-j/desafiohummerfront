@@ -1,1 +1,84 @@
-<p>dashboard works!</p>
+<mat-toolbar class="color-toolbar mat-elevation-z4">
+    <span *ngIf="available">Eventos Disponíveis</span>
+    <span *ngIf="!available">Eventos que Está Participando</span>
+
+    <span class="example-spacer"></span>
+
+    <a *ngIf="available" (click)="available = false" matTooltip="visualizar os eventos que está participando"
+        mat-icon-button>
+        <mat-icon>book_online</mat-icon>
+    </a>
+    <a *ngIf="!available" (click)="available = true" matTooltip="visualizar os eventos que está participando"
+        mat-icon-button>
+        <mat-icon>book_online</mat-icon>
+    </a>
+</mat-toolbar>
+
+<div *ngIf="available">
+    <div class="row">
+        <div *ngFor="let item of events">
+            <mat-card class="card col-xs-4 col-md-4 col-lg-4">
+
+                <div class="row end-xs">
+                    <a matTooltip="Adicionar Convidado" (click)="openGuestDialog()" mat-icon-button>
+                        <mat-icon>person_add_alt_1</mat-icon>
+                    </a>
+                </div>
+                <mat-card-header class="row center-xs">
+                    <mat-card-title>{{ item.eventName }}</mat-card-title>
+                    <mat-card-subtitle>Dia: {{ item.eventDate | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>
+                        Churrasco: R$ 20,00<br>
+                        Churrasco com Convidado: R$ 40,00<br>
+                        Churrasco sem Bebida: R$ 10,00<br>
+                        Churrasco com Convidado sem Bebida: R$ 20,00<br>
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions class="row center-xs">
+                    <button (click)="participate(item.id)" mat-button>Participar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="!available">
+    <div class="row">
+        <div *ngFor="let item of eventsUnavailable">
+            <mat-card class="card">
+                <div class="row end-xs">
+                    <a matTooltip="Cancelar Participação do Convidado" mat-icon-button>
+                        <mat-icon>person_remove_alt_1</mat-icon>
+                    </a>
+
+                    <a disabled matTooltip="Não tem concidado" mat-icon-button>
+                        <mat-icon>person_remove_alt_1</mat-icon>
+                    </a>
+                </div>
+                <mat-card-header class="row center-xs">
+                    <mat-card-title>{{ item.eventName }}</mat-card-title>
+                    <mat-card-subtitle>Dia: {{ item.eventDate | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>
+                        Churrasco: R$ 20,00<br>
+                        Churrasco com Convidado: R$ 40,00<br>
+                        Churrasco sem Bebida: R$ 10,00<br>
+                        Churrasco com Convidado sem Bebida: R$ 20,00<br>
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions class="row center-xs">
+                    <button (click)="unParticipate(item.id)" mat-button>Cancelar Participação</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

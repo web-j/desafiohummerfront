@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate([this.returnUrl]);
         this.toast(toast.welcome.message, toast.welcome.action);
       }, error => {
-        this.toast(toast.save_participant.message, toast.save_participant.action);
+        this.loading.close();
+        this.toast(toast.error.message, toast.error.action);
       });
   }
 

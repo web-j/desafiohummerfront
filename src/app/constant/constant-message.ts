@@ -17,5 +17,30 @@ export const toast = {
     block: {
         message: 'Seu Perfil não está autorizado!',
         action: 'Fechar'
+    },
+
+    event_update: {
+        message: 'Evento atualizado!',
+        action: 'Fechar'
+    },
+
+    event_save: {
+        message: 'Evento atualizado!',
+        action: 'Fechar'
+    },
+
+    event_encerrado: {
+        message: 'Evento Encerrado!',
+        action: 'Fechar'
+    },
+
+    event_participant: {
+        message: 'Você está participando do evento!',
+        action: 'Fechar'
+    },
+
+    event_participant_cancel: {
+        message: 'Sua participação foi cancelada!',
+        action: 'Fechar'
     }
 };

@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
         }, 500);
       },
       error => {
-        this.toast(toast.save_participant.message, toast.save_participant.action);
+        this.toast(toast.error.message, toast.error.action);
       });
   }
 

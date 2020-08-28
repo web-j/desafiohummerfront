@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivateChild {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
 
-      if (route.data.roles && route.data.roles.indexOf(currentUser.user.accessRule) === -1) {
+      if (route.data.roles && route.data.roles.indexOf(currentUser.user.accessRole) === -1) {
         this.router.navigate(['/']);
         return false;
       }
@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivateChild {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
 
-      if (route.data.roles && route.data.roles.indexOf(currentUser.user.accessRule) === -1) {
+      if (route.data.roles && route.data.roles.indexOf(currentUser.user.accessRole) === -1) {
         this.toast(toast.block.message, toast.block.action);
         return false;
       }
@@ -46,7 +46,7 @@ export class AuthGuard implements CanActivateChild {
       return true;
     }
 
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
     return true;
   }
 

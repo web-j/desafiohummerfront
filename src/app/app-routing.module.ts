@@ -18,7 +18,6 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent
       },
-
       {
         path: 'event',
         loadChildren: () => import('./view/event/event.module').then(mod => mod.EventModule)
