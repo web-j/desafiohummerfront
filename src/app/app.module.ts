@@ -12,9 +12,10 @@ import { JwtInterceptor } from './security/auth-interceptor/jwt.interceptor';
 import { ErrorInterceptor } from './security/auth-interceptor/error.interceptor';
 import { MaterialModule } from './material.module';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, ConverterStatusPipe } from './dashboard/dashboard.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { DialogUserEventComponent } from './dashboard/dialog-user-event/dialog-user-event.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -26,7 +27,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     DashboardComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ConverterStatusPipe,
+    DialogUserEventComponent
   ],
   imports: [
     BrowserModule,
@@ -36,13 +39,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MaterialModule,
     PerfectScrollbarModule
   ],
+
+  entryComponents: [
+    DialogUserEventComponent
+  ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    ConverterStatusPipe
 
   ],
   bootstrap: [AppComponent]

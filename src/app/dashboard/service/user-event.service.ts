@@ -21,6 +21,11 @@ export class UserEventService {
     return this.http.post(url, data);
   }
 
+  public update(data: UserEvent): Observable<any> {
+    const url = this.BASE_URL;
+    return this.http.put(url, data);
+  }
+
   public delete(data: UserEvent): Observable<any> {
     const url = this.BASE_URL + 'delete';
     return this.http.put(url, data);

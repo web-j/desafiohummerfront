@@ -1,0 +1,25 @@
+<mat-card class="row mat-elevation-z0 card" *ngIf="obj">
+    <mat-card-header class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs">
+        <mat-card-title> Participe deste Evento </mat-card-title>
+        <mat-card-subtitle>Informe os dados do seu convidado, se houver um</mat-card-subtitle>
+    </mat-card-header>
+
+    <form #form="ngForm">
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <mat-label>Informe o nome do Convidado (Opcional)</mat-label>
+                    <input #guestName="ngModel" name="guestName" [(ngModel)]="obj.guest.guestName" matInput placeholder="Ex.: Fulano de tal da silva">
+                </mat-form-field>
+
+                <mat-checkbox name="participantDrink" [(ngModel)]="obj.participantDrink" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Marque aqui se você irá beber!</mat-checkbox>
+                <mat-checkbox name="guestDrink" [(ngModel)]="obj.guestDrink" [disabled]="!obj.guest.guestName?.length > 0" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Marque aqui se seu convidado irá beber!</mat-checkbox>
+
+            </div>
+        </mat-card-content>
+    </form>
+    <mat-card-actions class="row center-xs">
+        <button (click)="close()" mat-button>Cancelar</button>
+        <button (click)="update()" [disabled]="!form.form.valid" mat-button>Enviar</button>
+    </mat-card-actions>
+</mat-card>

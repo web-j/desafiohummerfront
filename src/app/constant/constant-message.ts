@@ -42,5 +42,10 @@ export const toast = {
     event_participant_cancel: {
         message: 'Sua participação foi cancelada!',
         action: 'Fechar'
+    },
+
+    event_guest_cancel: {
+        message: 'O Convidado foi removido!',
+        action: 'Fechar'
     }
 };

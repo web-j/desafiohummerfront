@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -10,6 +10,7 @@ import { UserEventService } from './service/user-event.service';
 import { UserEvent } from './model/user-event.model';
 import { toast } from '../constant/constant-message';
 import { DialogGuestFormComponent } from '../view/participant/dialog-guest-form/dialog-guest-form.component';
+import { DialogUserEventComponent } from './dialog-user-event/dialog-user-event.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,10 +35,10 @@ export class DashboardComponent implements OnInit {
 
     public snack: MatSnackBar,
     public dialog: MatDialog,
-  ) { }
+  ) { this.currentUser = this.authService.currentUserValue; }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
+
     if (this.currentUser.user.accessRole === 'ADMIN') {
       this.router.navigate(['event']);
     }
@@ -49,28 +50,29 @@ export class DashboardComponent implements OnInit {
   getAll() {
     this.serviceEvent.GetAllEventsAvailable().subscribe(success => {
       this.events = success;
+      this.uservent = new UserEvent();
     });
   }
 
   getAllEventsUnavailable() {
     this.serviceEvent.getAllEventsUnavailable().subscribe(success => {
       this.eventsUnavailable = success;
-      console.log(this.eventsUnavailable);
+      this.uservent = new UserEvent();
     });
   }
 
-  participate(id: any) {
-    this.uservent.userId = this.currentUser.user.id;
-    this.uservent.eventId = id;
+  dialogParticipate(eventId: any) {
+    const userId = this.currentUser.user.id;
 
-    this.service.save(this.uservent).subscribe(
-      success => {
-        this.uservent = success;
-        this.toast(toast.event_participant.message, toast.event_participant.action);
-        this.getAll();
-        this.getAllEventsUnavailable();
-      }
-    );
+    const dialogRef = this.dialog.open(DialogUserEventComponent, {
+      width: '500px',
+      data: { eventId, userId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAll();
+      this.getAllEventsUnavailable();
+    });
   }
 
   unParticipate(id: any) {
@@ -85,11 +87,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  toast(message: string, action: string) {
-    this.snack.open(message, action, {
-      duration: 5000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right'
+  removeGuest(id: any) {
+    this.uservent.userId = this.currentUser.user.id;
+    this.uservent.eventId = id;
+    this.uservent.guestDrink = false;
+
+    this.service.update(this.uservent).subscribe(success => {
+      this.uservent = success;
+      this.toast(toast.event_guest_cancel.message, toast.event_guest_cancel.action);
+      this.getAll();
+      this.getAllEventsUnavailable();
     });
   }
 
@@ -104,4 +111,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  toast(message: string, action: string) {
+    this.snack.open(message, action, {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right'
+    });
+  }
+
+}
+
+@Pipe({ name: 'enumConverter' })
+export class ConverterStatusPipe implements PipeTransform {
+  transform(statusName: string): string {
+    if (statusName === 'CLOSED') {
+      return 'Evento Encerrado';
+    } else if (statusName === 'IN_PROGRESS') {
+      return 'Em Andamento';
+    }
+  }
 }
