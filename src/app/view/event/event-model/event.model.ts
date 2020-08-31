@@ -3,4 +3,7 @@ export class Event {
     eventName: string;
     eventDate: Date;
     statusEvent: string;
+    totalSpentFood: number;
+    totalSpentDrink: number;
+    totalSpent: number;
 }

@@ -38,7 +38,7 @@
                 <th mat-header-cell id="action-cell" *matHeaderCellDef> Ações </th>
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-action">
-                        <a matTooltip="Acessar Dashboard" mat-icon-button>
+                        <a (click)="viewDashboard(element.id)" matTooltip="Acessar Dashboard" mat-icon-button>
                             <mat-icon>dashboard</mat-icon>
                         </a>
 

@@ -7,6 +7,7 @@ import { DialogEventFormComponent } from './dialog-event-form/dialog-event-form.
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 import { toast } from 'src/app/constant/constant-message';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -20,6 +21,8 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private router: Router,
+
     public dialog: MatDialog,
     public snack: MatSnackBar
   ) { }
@@ -54,6 +57,10 @@ export class EventListComponent implements OnInit {
         this.toast(toast.error.message, toast.error.action);
       }
     );
+  }
+
+  viewDashboard(id: string) {
+    this.router.navigate(['event/details', id]);
   }
 
   toast(message: string, action: string) {

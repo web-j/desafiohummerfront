@@ -4,11 +4,13 @@ table {
 
 mat-card {
     padding: 50px;
+    margin-top: 20px;
 }
 
 #action-cell {
     text-align: right !important;
 }
+
 .mat-column-action {
     div.mat-sort-header-container {
         justify-content: flex-end !important;
