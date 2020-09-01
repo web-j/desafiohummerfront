@@ -16,6 +16,7 @@ import { DashboardComponent, ConverterStatusPipe } from './dashboard/dashboard.c
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { DialogUserEventComponent } from './dashboard/dialog-user-event/dialog-user-event.component';
+import { ConverteraccessRolePipe } from './view/participant/participant-list/participant-list.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -52,7 +53,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     ConverterStatusPipe
-
   ],
   bootstrap: [AppComponent]
 })
